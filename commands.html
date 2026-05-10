@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>دليل لينكس | الأوامر الشاملة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-green: #00ff41;
+            --bg-black: #0d0d0d;
+            --dark-gray: #1a1a1a;
+            --text-white: #e0e0e0;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--dark-gray);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--main-green);
+        }
+
+        h1 { font-family: 'Share Tech Mono', monospace; color: var(--main-green); margin-bottom: 10px; }
+
+        nav { margin-top: 15px; }
+        nav a { margin: 0 20px; color: white; text-decoration: none; font-weight: bold; font-size: 1.1rem;}
+        nav a:hover { color: var(--main-green); }
+
+        /* التعديل: دفع القائمة لليمين أكثر عن طريق تباعد أكبر (space-between) */
+        .layout-wrapper {
+            display: flex;
+            max-width: 1400px; /* كبرنا العرض حتى القائمة تروح لليمين أكثر */
+            margin: 40px auto;
+            padding: 0 20px;
+            justify-content: space-between; /* هذي تدفع القائمة لليمين والمحتوى لليسار */
+            gap: 50px;
+        }
+
+        /* التعديل: تثبيت القائمة في وسط الشاشة */
+        .sidebar {
+            flex: 0 0 230px;
+            background-color: var(--dark-gray);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            height: fit-content;
+            position: sticky;
+            top: 50vh; /* هذي تخليها توقف بنص الشاشة عامودياً */
+            transform: translateY(-50%); /* لضبط التوسيط 100% */
+        }
+
+        .sidebar h3 {
+            color: var(--main-green);
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+            margin-top: 0;
+            font-size: 1.2rem;
+        }
+
+        .sidebar ul { list-style-type: none; padding: 0; margin: 0; }
+        .sidebar li { margin-bottom: 12px; }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 8px 10px;
+            border-radius: 5px;
+            transition: 0.3s;
+            border-right: 3px solid transparent;
+            font-size: 0.95rem;
+        }
+
+        .sidebar a:hover {
+            background-color: #222;
+            color: var(--main-green);
+            border-right: 3px solid var(--main-green);
+        }
+
+        .content {
+            flex: 1;
+            max-width: 1000px; /* تكبير الجداول شوية */
+        }
+
+        .category-section {
+            background-color: var(--dark-gray);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid #333;
+        }
+
+        .category-title {
+            color: var(--main-green);
+            border-bottom: 2px solid #444;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .category-title::before {
+            content: ">_ ";
+            font-family: 'Share Tech Mono', monospace;
+            margin-left: 10px;
+        }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #444; padding: 12px 15px; text-align: right; }
+        th { background-color: #222; color: var(--main-green); font-size: 1.1rem; }
+        tr:hover { background-color: #252525; }
+
+        /* التعديل: إزالة الخلفية السوداء للأوامر */
+        code {
+            font-family: 'Share Tech Mono', monospace;
+            background-color: transparent; /* شلنا الخلفية */
+            color: #00ffff; /* السماوي */
+            font-size: 1.15rem;
+            font-weight: bold; /* سوينا الخط عريض حتى يبرز بدون خلفية */
+            display: inline-block;
+            direction: ltr;
+        }
+
+        footer { background-color: var(--dark-gray); color: #888; padding: 20px; text-align: center; border-top: 1px solid #333; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>دليل <span style="color: white;">Linux</span> | مرجع الأوامر الشامل</h1>
+        <nav>
+            <a href="index.html">الرئيسية</a>
+            <a href="commands.html">الأوامر الأساسية</a>
+            <a href="contact.html">المطور</a>
+        </nav>
+    </header>
+
+    <div class="layout-wrapper">
+        
+        <aside class="sidebar">
+            <h3>تصنيفات الأوامر</h3>
+            <ul>
+                <li><a href="#files">📁 إدارة الملفات</a></li>
+                <li><a href="#system">💻 مراقبة النظام</a></li>
+                <li><a href="#network">🌐 الشبكات والاتصال</a></li>
+                <li><a href="#users">👤 إدارة المستخدمين</a></li>
+                <li><a href="#dnf">📦 إدارة الحزم (Fedora)</a></li>
+            </ul>
+        </aside>
+
+        <main class="content">
+            
+            <section id="files" class="category-section">
+                <h2 class="category-title">إدارة الملفات والمجلدات والنصوص</h2>
+                <table>
+                    <tr><th style="width: 28%;">الأمر</th><th>الوظيفة</th></tr>
+                    <tr><td><code>pwd</code></td><td>معرفة مسار المجلد الحالي (Print Working Directory).</td></tr>
+                    <tr><td><code>ls -lah</code></td><td>عرض الملفات بالتفصيل مع إظهار الأحجام بصيغة مقروءة (MB, GB).</td></tr>
+                    <tr><td><code>cd ~</code></td><td>العودة مباشرة إلى مجلد المستخدم الرئيسي (Home).</td></tr>
+                    <tr><td><code>mkdir -p dir1/dir2</code></td><td>إنشاء شجرة مجلدات متداخلة بضغطة واحدة.</td></tr>
+                    <tr><td><code>touch file.txt</code></td><td>إنشاء ملف نصي فارغ.</td></tr>
+                    <tr><td><code>cp -r src/ dest/</code></td><td>نسخ مجلد كامل بكافة محتوياته (-r يعني Recursive).</td></tr>
+                    <tr><td><code>mv old.txt new.txt</code></td><td>إعادة تسمية ملف أو نقله لمسار آخر.</td></tr>
+                    <tr><td><code>rm -rf /path</code></td><td>حذف مجلد وملفاته نهائياً وبدون تأكيد (خطر!).</td></tr>
+                    <tr><td><code>cat file.txt</code></td><td>قراءة محتوى الملف وعرضه بالشاشة.</td></tr>
+                    <tr><td><code>head -n 10 file</code></td><td>عرض أول 10 أسطر فقط من الملف.</td></tr>
+                    <tr><td><code>tail -f /var/log/syslog</code></td><td>مراقبة التحديثات على ملف السجلات (Log) بشكل حي.</td></tr>
+                    <tr><td><code>grep "error" log.txt</code></td><td>البحث عن كلمة "error" بداخل الملف النصي.</td></tr>
+                    <tr><td><code>find / -name "app*"</code></td><td>البحث في كامل النظام عن أي ملف يبدأ اسمه بـ app.</td></tr>
+                    <tr><td><code>tar -czvf arc.tar.gz dir/</code></td><td>ضغط مجلد وتحويله إلى ملف مضغوط (tar.gz).</td></tr>
+                    <tr><td><code>chmod 755 script.sh</code></td><td>تغيير صلاحيات الملف لإعطاء إذن التنفيذ.</td></tr>
+                    <tr><td><code>chown root file.txt</code></td><td>تغيير مالك الملف إلى المستخدم الجذر (root).</td></tr>
+                </table>
+            </section>
+
+            <section id="system" class="category-section">
+                <h2 class="category-title">مراقبة النظام وإدارة الموارد</h2>
+                <table>
+                    <tr><th style="width: 28%;">الأمر</th><th>الوظيفة</th></tr>
+                    <tr><td><code>top</code></td><td>مراقب النظام الكلاسيكي لعرض العمليات واستهلاك الموارد.</td></tr>
+                    <tr><td><code>htop</code></td><td>نسخة تفاعلية وملونة لإدارة العمليات (تتطلب تنصيب).</td></tr>
+                    <tr><td><code>ps aux | grep nginx</code></td><td>البحث عن عملية معينة (مثل nginx) وتفاصيلها.</td></tr>
+                    <tr><td><code>kill -9 [PID]</code></td><td>إيقاف عملية معلقة قسرياً باستخدام المعرف الخاص بها.</td></tr>
+                    <tr><td><code>killall firefox</code></td><td>إغلاق جميع العمليات التابعة لبرنامج معين بالاسم.</td></tr>
+                    <tr><td><code>free -h</code></td><td>عرض استهلاك الرام (RAM) بصيغة مقروءة وسهلة.</td></tr>
+                    <tr><td><code>df -h</code></td><td>عرض مساحة التخزين المتبقية والمستهلكة في الأقراص الصلبة.</td></tr>
+                    <tr><td><code>du -sh /folder</code></td><td>حساب حجم مجلد معين بشكل دقيق.</td></tr>
+                    <tr><td><code>uptime</code></td><td>معرفة المدة الزمنية لتشغيل النظام بشكل متواصل.</td></tr>
+                    <tr><td><code>uname -a</code></td><td>عرض تفاصيل النظام ونواة لينكس بالكامل.</td></tr>
+                    <tr><td><code>lscpu</code></td><td>عرض معمارية المعالج وعدد الأنوية.</td></tr>
+                    <tr><td><code>lsblk</code></td><td>عرض الأقراص الصلبة المربوطة وتقسيماتها (Partitions).</td></tr>
+                    <tr><td><code>dmesg</code></td><td>عرض رسائل النواة (Kernel) للبحث عن أخطاء العتاد (Hardware).</td></tr>
+                    <tr><td><code>systemctl status sshd</code></td><td>معرفة حالة خدمة معينة في النظام (تعمل أو متوقفة).</td></tr>
+                </table>
+            </section>
+
+            <section id="network" class="category-section">
+                <h2 class="category-title">الشبكات والاتصالات</h2>
+                <table>
+                    <tr><th style="width: 28%;">الأمر</th><th>الوظيفة</th></tr>
+                    <tr><td><code>ip a</code></td><td>عرض عناوين الـ IP الخاصة بكروت الشبكة.</td></tr>
+                    <tr><td><code>ping 8.8.8.8</code></td><td>اختبار الاتصال بالإنترنت مع سيرفرات جوجل.</td></tr>
+                    <tr><td><code>netstat -tulpn</code></td><td>عرض جميع المنافذ (Ports) المفتوحة في الجهاز.</td></tr>
+                    <tr><td><code>ss -tuln</code></td><td>أداة حديثة وأسرع من netstat لعرض المنافذ.</td></tr>
+                    <tr><td><code>ssh user@192.x.x.x</code></td><td>الدخول والتحكم الآمن بسيرفر لينكس بعيد.</td></tr>
+                    <tr><td><code>scp file.txt user@ip:/path</code></td><td>نقل ملف من جهازك إلى السيرفر البعيد بأمان.</td></tr>
+                    <tr><td><code>curl -I google.com</code></td><td>جلب استجابة السيرفر (HTTP Headers) لموقع معين.</td></tr>
+                    <tr><td><code>wget [URL]</code></td><td>تحميل الملفات المباشرة من الإنترنت عبر سطر الأوامر.</td></tr>
+                    <tr><td><code>traceroute google.com</code></td><td>تتبع مسار الاتصال من جهازك إلى السيرفر المطلوب.</td></tr>
+                    <tr><td><code>nmcli device show</code></td><td>أمر خاص بإدارة الشبكات والواي فاي (مشهور في Fedora).</td></tr>
+                </table>
+            </section>
+
+            <section id="users" class="category-section">
+                <h2 class="category-title">إدارة المستخدمين والصلاحيات</h2>
+                <table>
+                    <tr><th style="width: 28%;">الأمر</th><th>الوظيفة</th></tr>
+                    <tr><td><code>whoami</code></td><td>عرض اسم المستخدم المسجل دخوله حالياً.</td></tr>
+                    <tr><td><code>w</code></td><td>معرفة من هم المستخدمون المتصلون بالنظام وماذا يفعلون.</td></tr>
+                    <tr><td><code>sudo [cmd]</code></td><td>إعطاء صلاحية المدير (Root) لتنفيذ أمر معين.</td></tr>
+                    <tr><td><code>useradd -m ahmed</code></td><td>إنشاء مستخدم جديد مع إنشاء مجلد Home خاص به.</td></tr>
+                    <tr><td><code>usermod -aG wheel ahmed</code></td><td>إضافة المستخدم لمجموعة معينة (مثلاً إعطاؤه صلاحية sudo).</td></tr>
+                    <tr><td><code>userdel -r ahmed</code></td><td>حذف المستخدم ومسح جميع ملفاته نهائياً.</td></tr>
+                    <tr><td><code>passwd ahmed</code></td><td>تعيين أو تغيير الباسورد للمستخدم.</td></tr>
+                    <tr><td><code>groups</code></td><td>عرض المجموعات التي ينتمي إليها المستخدم الحالي.</td></tr>
+                    <tr><td><code>su - root</code></td><td>التبديل إلى حساب المستخدم الجذر (Root).</td></tr>
+                </table>
+            </section>
+
+            <section id="dnf" class="category-section">
+                <h2 class="category-title">إدارة الحزم المتقدمة (Fedora DNF)</h2>
+                <table>
+                    <tr><th style="width: 28%;">الأمر</th><th>الوظيفة</th></tr>
+                    <tr><td><code>sudo dnf update</code></td><td>البحث عن تحديثات النظام والبرامج وتنصيبها.</td></tr>
+                    <tr><td><code>sudo dnf install vim</code></td><td>تنصيب حزمة أو برنامج معين.</td></tr>
+                    <tr><td><code>sudo dnf remove vim</code></td><td>إزالة برنامج من النظام.</td></tr>
+                    <tr><td><code>sudo dnf autoremove</code></td><td>حذف الحزم الاعتمادية التي لم يعد النظام بحاجة إليها.</td></tr>
+                    <tr><td><code>dnf search web server</code></td><td>البحث عن برامج في المستودع بكلمات مفتاحية.</td></tr>
+                    <tr><td><code>dnf info nginx</code></td><td>عرض معلومات وتفاصيل كاملة عن حزمة قبل تنصيبها.</td></tr>
+                    <tr><td><code>dnf list installed</code></td><td>عرض قائمة بجميع البرامج المنصبة على جهازك.</td></tr>
+                    <tr><td><code>sudo dnf clean all</code></td><td>حذف الكاش (Cache) لتوفير المساحة وتصليح أخطاء التحديث.</td></tr>
+                    <tr><td><code>dnf history</code></td><td>عرض سجل التحديثات والتنصيبات للرجوع إليها إن حصل خطأ.</td></tr>
+                    <tr><td><code>sudo dnf system-upgrade</code></td><td>ترقية نظام Fedora بالكامل إلى إصدار أحدث.</td></tr>
+                </table>
+            </section>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>تم تطوير هذا المشروع كجزء من متطلبات مادة تنظيم الحاسوب</p>
+        <p>المطور: <strong>حسن عباس جمعة</strong> | جامعة كربلاء - قسم الـ IT</p>
+    </footer>
+
+</body>
+</html>
