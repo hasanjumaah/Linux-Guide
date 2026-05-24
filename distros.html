@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>دليل لينكس | التوزيعات والواجهات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --main-green: #00ff41;
+            --bg-black: #0d0d0d;
+            --dark-gray: #1a1a1a;
+            --text-white: #e0e0e0;
+            --link-blue: #00ffff;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--dark-gray);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 3px solid var(--main-green);
+        }
+
+        h1 { font-family: 'Share Tech Mono', monospace; color: var(--main-green); margin-bottom: 10px; }
+
+        nav { margin-top: 15px; }
+        nav a { margin: 0 15px; color: white; text-decoration: none; font-weight: bold; font-size: 1.1rem;}
+        nav a:hover { color: var(--main-green); }
+        nav a.active { color: var(--main-green); border-bottom: 2px solid var(--main-green); }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            color: var(--main-green);
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        /* تنسيق بطاقات التوزيعات */
+        .distro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .distro-card {
+            background-color: var(--dark-gray);
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 20px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .distro-card::before {
+            content: "";
+            position: absolute;
+            top: 0; right: 0; width: 5px; height: 100%;
+        }
+
+        .card-dev::before { background-color: #3498db; } /* أزرق للتطوير */
+        .card-server::before { background-color: #e74c3c; } /* أحمر للسيرفرات */
+        .card-game::before { background-color: #9b59b6; } /* بنفسجي للألعاب */
+
+        .distro-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 255, 65, 0.1);
+        }
+
+        .distro-card h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .distro-card p {
+            color: #ccc;
+            font-size: 1.05rem;
+        }
+
+        .distro-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: var(--main-green);
+            text-decoration: none;
+            font-family: 'Share Tech Mono', monospace;
+            font-weight: bold;
+        }
+
+        .distro-link:hover { text-decoration: underline; }
+
+        /* تنسيق الواجهات */
+        .gui-section {
+            background-color: #111;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px dashed #444;
+        }
+
+        .gui-item {
+            margin-bottom: 20px;
+            padding-right: 20px;
+            border-right: 3px solid var(--link-blue);
+        }
+
+        .gui-item h4 { color: var(--link-blue); margin: 0 0 5px 0; font-size: 1.3rem; }
+
+        .notice-box {
+            background-color: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--main-green);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        footer { background-color: var(--dark-gray); color: #888; padding: 20px; text-align: center; border-top: 1px solid #333; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>دليل <span style="color: white;">Linux</span> | التوزيعات والواجهات</h1>
+        <nav>
+            <a href="index.html">الرئيسية</a>
+            <a href="commands.html">الأوامر الأساسية</a>
+            <a href="distros.html" class="active">عالم التوزيعات</a>
+            <a href="contact.html">المطور</a>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <p style="font-size: 1.2rem; text-align: center; color: #aaa;">
+            لينكس ليس نظاماً واحداً فحسب، بل هو "نواة" (Kernel) تُبنى عليها مئات الأنظمة المختلفة التي تُعرف بـ <strong>التوزيعات (Distributions أو Distros)</strong>. كل توزيعة مجهزة مسبقاً ببرامج وواجهات تناسب تخصصاً معيناً.
+        </p>
+
+        <h2 class="section-title">💻 توزيعات البرمجة والتطوير (Development)</h2>
+        <div class="distro-grid">
+            <div class="distro-card card-dev">
+                <h3 style="color: #3498db;">⚙️ Fedora Workstation</h3>
+                <p>الخيار الأول لمطوري البرمجيات ومدراء النظم. تقدم دائماً أحدث الحزم البرمجية والتقنيات وتعتبر البيئة المثالية لتطبيقات الويب وإدارة الحاويات.</p>
+                <a href="https://fedoraproject.org/workstation/" target="_blank" class="distro-link">🔗 fedoraproject.org >></a>
+            </div>
+            <div class="distro-card card-dev">
+                <h3 style="color: #3498db;">🚀 Ubuntu</h3>
+                <p>التوزيعة الأشهر عالمياً والمدعومة بأكبر مجتمع للمطورين. مثالية للمبتدئين وتتوفر لها شروحات لحل أي مشكلة برمجية قد تواجهك.</p>
+                <a href="https://ubuntu.com/" target="_blank" class="distro-link">🔗 ubuntu.com >></a>
+            </div>
+        </div>
+
+        <h2 class="section-title">🖧 توزيعات السيرفرات والخوادم (Servers)</h2>
+        <div class="distro-grid">
+            <div class="distro-card card-server">
+                <h3 style="color: #e74c3c;">🛡️ Debian</h3>
+                <p>صخرة الاستقرار في عالم لينكس. لا تحتوي على أحدث البرامج، ولكنها تعوض ذلك باستقرار أمني وعملي يجعلها تعمل لسنوات دون الحاجة لإعادة تشغيل.</p>
+                <a href="https://www.debian.org/" target="_blank" class="distro-link">🔗 debian.org >></a>
+            </div>
+            <div class="distro-card card-server">
+                <h3 style="color: #e74c3c;">🏢 AlmaLinux</h3>
+                <p>توزيعة قوية جداً مبنية لتكون متوافقة 100% مع بيئة الشركات القائمة على Red Hat. تعتبر الخيار الأفضل لاستضافة المواقع السحابية الكبرى.</p>
+                <a href="https://almalinux.org/" target="_blank" class="distro-link">🔗 almalinux.org >></a>
+            </div>
+        </div>
+
+        <h2 class="section-title">🎮 توزيعات الألعاب والترفيه (Gaming)</h2>
+        <div class="distro-grid">
+            <div class="distro-card card-game">
+                <h3 style="color: #9b59b6;">👾 Pop!_OS</h3>
+                <p>توزيعة رائعة للألعاب، ميزتها الكبرى أنها تأتي بنسخة تحتوي على تعريفات كروت الشاشة (NVIDIA) مدمجة وجاهزة للعمل فور التنصيب بدون تعقيد.</p>
+                <a href="https://pop.system76.com/" target="_blank" class="distro-link">🔗 pop.system76.com >></a>
+            </div>
+            <div class="distro-card card-game">
+                <h3 style="color: #9b59b6;">🕹️ Nobara Linux</h3>
+                <p>توزيعة مبنية أساساً على هيكل Fedora ولكن تم تعديل النواة الخاصة بها خصيصاً لتعطي أقصى أداء وتوافق مع أذرع التحكم (Joysticks) وألعاب المنصات.</p>
+                <a href="https://nobaraproject.org/" target="_blank" class="distro-link">🔗 nobaraproject.org >></a>
+            </div>
+        </div>
+
+        <div class="notice-box">
+            📌 ملاحظة هامة: المعلومات المذكورة هنا هي نبذة تعريفية فقط. يمكنك استكشاف باقي المميزات، أدلة التثبيت، ومتطلبات التشغيل الدقيقة من خلال زيارة الروابط الرسمية المرفقة أسفل كل توزيعة.
+        </div>
+
+        <h2 class="section-title">🖥️ الواجهات الرسومية (Desktop Environments)</h2>
+        <div class="gui-section">
+            <p style="margin-top: 0;">في ويندوز أو ماك، أنت مقيد بواجهة واحدة. أما في لينكس، يمكنك تغيير شكل النظام بالكامل بتنصيب "واجهة" جديدة:</p>
+            
+            <div class="gui-item">
+                <h4>GNOME (جنوم)</h4>
+                <p>الواجهة الافتراضية في أنظمة مثل Fedora و Ubuntu. تتميز بتصميم عصري جداً، انسيابي، يركز على الكيبورد وسرعة الإنجاز بدون تشتيت، وممتازة لشاشات اللمس.</p>
+            </div>
+            
+            <div class="gui-item">
+                <h4>KDE Plasma (كيدي بلازما)</h4>
+                <p>أكثر واجهة قابلة للتخصيص في عالم اللينكس. تشبه تخطيط ويندوز (شريط مهام بالأسفل وقائمة ابدأ)، خفيفة على الموارد وتتيح لك تغيير كل بكسل في الشاشة.</p>
+            </div>
+
+            <div class="gui-item">
+                <h4>XFCE</h4>
+                <p>واجهة كلاسيكية خفيفة جداً كالريشة. مصممة لتعمل بكفاءة عالية على الحواسيب القديمة أو الموارد الضعيفة دون التضحية بالوظائف الأساسية.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>تم تطوير هذا المشروع كجزء من متطلبات مادة إدارة النظام</p>
+        <p>المطور: <strong>حسن عباس جمعة</strong> | جامعة كربلاء - قسم الـ IT</p>
+    </footer>
+
+</body>
+</html>
