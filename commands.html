@@ -39,10 +39,10 @@
         /* التعديل: دفع القائمة لليمين أكثر عن طريق تباعد أكبر (space-between) */
         .layout-wrapper {
             display: flex;
-            max-width: 1400px; /* كبرنا العرض حتى القائمة تروح لليمين أكثر */
+            max-width: 1400px;
             margin: 40px auto;
             padding: 0 20px;
-            justify-content: space-between; /* هذي تدفع القائمة لليمين والمحتوى لليسار */
+            justify-content: space-between;
             gap: 50px;
         }
 
@@ -55,8 +55,8 @@
             padding: 20px;
             height: fit-content;
             position: sticky;
-            top: 50vh; /* هذي تخليها توقف بنص الشاشة عامودياً */
-            transform: translateY(-50%); /* لضبط التوسيط 100% */
+            top: 50vh;
+            transform: translateY(-50%);
         }
 
         .sidebar h3 {
@@ -89,7 +89,7 @@
 
         .content {
             flex: 1;
-            max-width: 1000px; /* تكبير الجداول شوية */
+            max-width: 1000px;
         }
 
         .category-section {
@@ -123,10 +123,10 @@
         /* التعديل: إزالة الخلفية السوداء للأوامر */
         code {
             font-family: 'Share Tech Mono', monospace;
-            background-color: transparent; /* شلنا الخلفية */
-            color: #00ffff; /* السماوي */
+            background-color: transparent;
+            color: #00ffff;
             font-size: 1.15rem;
-            font-weight: bold; /* سوينا الخط عريض حتى يبرز بدون خلفية */
+            font-weight: bold;
             display: inline-block;
             direction: ltr;
         }
@@ -141,6 +141,7 @@
         <nav>
             <a href="index.html">الرئيسية</a>
             <a href="commands.html">الأوامر الأساسية</a>
+            <a href="distros.html">عالم التوزيعات</a>
             <a href="contact.html">المطور</a>
         </nav>
     </header>
@@ -155,6 +156,7 @@
                 <li><a href="#network">🌐 الشبكات والاتصال</a></li>
                 <li><a href="#users">👤 إدارة المستخدمين</a></li>
                 <li><a href="#dnf">📦 إدارة الحزم (Fedora)</a></li>
+                <li><a href="#advanced">⚙️ أوامر متقدمة وحل المشاكل</a></li>
             </ul>
         </aside>
 
@@ -213,7 +215,7 @@
                     <tr><td><code>netstat -tulpn</code></td><td>عرض جميع المنافذ (Ports) المفتوحة في الجهاز.</td></tr>
                     <tr><td><code>ss -tuln</code></td><td>أداة حديثة وأسرع من netstat لعرض المنافذ.</td></tr>
                     <tr><td><code>ssh user@192.x.x.x</code></td><td>الدخول والتحكم الآمن بسيرفر لينكس بعيد.</td></tr>
-                    <tr><td><code>scp file.txt user@ip:/path</code></td><td>نقل ملف من جهازك إلى السيرفر البعيد بأمان.</td></tr>
+                    <tr><td><code>scp file.txt user@ip:/path`</code></td><td>نقل ملف من جهازك إلى السيرفر البعيد بأمان.</td></tr>
                     <tr><td><code>curl -I google.com</code></td><td>جلب استجابة السيرفر (HTTP Headers) لموقع معين.</td></tr>
                     <tr><td><code>wget [URL]</code></td><td>تحميل الملفات المباشرة من الإنترنت عبر سطر الأوامر.</td></tr>
                     <tr><td><code>traceroute google.com</code></td><td>تتبع مسار الاتصال من جهازك إلى السيرفر المطلوب.</td></tr>
@@ -251,6 +253,17 @@
                     <tr><td><code>sudo dnf clean all</code></td><td>حذف الكاش (Cache) لتوفير المساحة وتصليح أخطاء التحديث.</td></tr>
                     <tr><td><code>dnf history</code></td><td>عرض سجل التحديثات والتنصيبات للرجوع إليها إن حصل خطأ.</td></tr>
                     <tr><td><code>sudo dnf system-upgrade</code></td><td>ترقية نظام بالكامل إلى إصدار أحدث.</td></tr>
+                </table>
+            </section>
+
+            <section id="advanced" class="category-section">
+                <h2 class="category-title">أوامر متقدمة وحل المشاكل (Troubleshooting)</h2>
+                <table>
+                    <tr><th style="width: 28%;">الأمر</th><th>الوظيفة</th></tr>
+                    <tr><td><code>gs -sDEVICE=pdfwrite -dPDFSETTINGS=/screen -dNOPAUSE -dBATCH -sOutputFile=out.pdf in.pdf</code></td><td>استخدام أداة Ghostscript لضغط ملفات الـ PDF وتقليل حجمها بشكل هائل (مثلاً من 650MB إلى أحجام صغيرة جداً) عبر التيرمنال.</td></tr>
+                    <tr><td><code>sudo update-ca-trust</code></td><td>تحديث شهادات الأمان وحل أخطاء الـ SSL Certificate، خصوصاً عند إضافة مستودعات خارجية (Repositories).</td></tr>
+                    <tr><td><code>journalctl -xe</code></td><td>عرض السجلات التفصيلية للنظام للبحث عن أسباب تعطل الخدمات أو البرامج.</td></tr>
+                    <tr><td><code>chattr +i file.txt</code></td><td>قفل الملف وجعله "غير قابل للتعديل أو الحذف" حتى من قبل مدير النظام (Root) كإجراء أمني متقدم.</td></tr>
                 </table>
             </section>
 
